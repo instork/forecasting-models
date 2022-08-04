@@ -1,0 +1,6 @@
+data/arima
+
+.env
+.ipynb_checkpoints
+.vscode
+__pycache__
