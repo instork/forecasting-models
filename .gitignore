@@ -4,3 +4,4 @@ data/arima
 .ipynb_checkpoints
 .vscode
 __pycache__
+fil-result

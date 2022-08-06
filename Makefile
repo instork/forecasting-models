@@ -7,6 +7,6 @@ env:
 
 setup:
 	conda install --file requirements.txt $(addprefix -c ,$(CONDA_CH))
-
+	pip install -r requirements-pip.txt
 add_notebook:
 	python -m ipykernel install --user --name $(BASENAME) --display-name $(BASENAME)
