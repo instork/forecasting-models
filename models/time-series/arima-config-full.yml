@@ -1,0 +1,7 @@
+searchSpaceFile: arima-space.json
+trialCommand: python3 arima-nni-full.py  # NOTE: change "python3" to "python" if you are using Windows
+trialConcurrency: 1
+tuner:
+  name: GridSearch
+trainingService:
+  platform: local
