@@ -1,8 +1,8 @@
 {
-    "p" : {"_type": "choice", "_value": [0,1,2,3,4,5,6,7] },
+    "p" : {"_type": "choice", "_value": [0,1,2,3] },
     "d" : {"_type": "choice", "_value": [0,1] },
-    "q" : {"_type": "choice", "_value": [0,1,2,3,4,5,6,7]},
+    "q" : {"_type": "choice", "_value": [0,1,2,3]},
     "train_size" : {"_type": "choice", "_value": [30, 60, 90, 120, 180]},
-    "trend" : {"_type": "choice", "_value": ["c", "ct"]}
+    "trend" : {"_type": "choice", "_value": ["n", "c", "t", "ct"]}
 }
 
