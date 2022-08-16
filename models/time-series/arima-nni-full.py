@@ -32,13 +32,17 @@ def get_params():
         "--train_size", type=int, default=30, 
         help="# of train days"
     )
+    parser.add_argument(
+        "--trend", type=str, default='c', 
+        help="add trend parameter"
+    )
     args, _ = parser.parse_known_args()
     return args
 
 def train_evaluate(args):
     file_dir = '../../data/arima_3rd'
     os.makedirs(file_dir, exist_ok=True)
-    p, d, q, train_size = args['p'], args['d'], args['q'], args['train_size']
+    p, d, q, train_size, trend = args['p'], args['d'], args['q'], args['train_size'], args['trend']
 
     daily_btc_df = pd.read_csv('../../data/daily_btc_df.csv', parse_dates=['etz_date'])
     daily_btc_df = daily_btc_df.set_index('etz_date')
@@ -58,7 +62,7 @@ def train_evaluate(args):
     for i in range(len(val_full_set)):
         train_set = daily_btc_series.iloc[i:max_train_size+i].iloc[-train_size:]
         try:
-            model = ARIMA(endog=train_set, order=(p, d, q)).fit()
+            model = ARIMA(endog=train_set, order=(p, d, q), trend=trend).fit()
             forecast = model.forecast(steps=1)
             cur_aic = model.aic
             cur_bic = model.bic

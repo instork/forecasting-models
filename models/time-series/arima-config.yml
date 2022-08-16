@@ -1,4 +1,4 @@
-searchSpaceFile: arima-space.json
+searchSpaceFile: arima-space-exp12.json
 trialCommand: python3 arima-nni.py  # NOTE: change "python3" to "python" if you are using Windows
 trialConcurrency: 1
 tuner:
