@@ -91,7 +91,11 @@ def train_evaluate(args):
         if i % 10 == 0 and i > 0:
             y_pred = pd.concat(val_preds_steps).values
             y_true = val_full_set.iloc[:i+1].values
-            nni.report_intermediate_result(np.sqrt(mean_squared_error(y_true=y_true, y_pred=y_pred)))
+            if sum(pd.isna(y_pred)) == 0:
+                nni.report_intermediate_result(np.sqrt(mean_squared_error(y_true=y_true, y_pred=y_pred)))
+            else:
+                nni.report_final_result(np.nan)
+                return
 
     assert len(val_full_set) == len(val_preds_steps) == len(aic) == len(bic)
     
@@ -100,10 +104,10 @@ def train_evaluate(args):
     result_df.columns = ["y_true", "y_pred"]
     result_df["aic"] = aic
     result_df["bic"] = bic
-
-    rmse = np.sqrt(mean_squared_error(y_true=result_df.y_true, y_pred=result_df.y_pred))
-
-    nni.report_final_result(rmse)
+    
+    if sum(result_df.y_pred.isna()) == 0:
+        rmse = np.sqrt(mean_squared_error(y_true=result_df.y_true, y_pred=result_df.y_pred))
+        nni.report_final_result(rmse)
 
     file_name = f'{p}_{d}_{q}_{train_size}.csv'
     file_loc = os.path.join(file_dir, file_name)

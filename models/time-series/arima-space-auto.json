@@ -1,0 +1,4 @@
+{
+    "train_size" : {"_type": "choice", "_value": [30, 60, 90, 120, 180]}   
+}
+
